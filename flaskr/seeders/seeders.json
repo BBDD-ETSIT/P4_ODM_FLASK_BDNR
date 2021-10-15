@@ -1,0 +1,114 @@
+{
+  "hospitals": [
+    {
+      "id": "9f8a5c90-cf1a-4ca3-9dea-c6a94174ae69",
+      "name": "Hospital Univesitario La Paz",
+      "city": "Madrid"
+    },{
+      "id": "b04fde75-59d8-457f-82b9-c25f2c64abfc",
+      "name": "Hospital Carlos III",
+      "city": "Madrid"
+    },{
+      "id": "c5d7cbea-55a4-4809-9969-82b148032a0e",
+      "name": "Hospital del Mar",
+      "city": "Barcelona"
+    },{
+      "id": "db6da10f-4ec4-468a-ad46-36a407480fa7",
+      "name": "Complejo Asistencial de Segovia",
+      "city": "Segovia"
+    },{
+      "id": "d2dc1154-1329-4e56-a5c3-8e88b63f3c4a",
+      "name": "Hospital Virgen de la Salud",
+      "city": "Toledo"
+    }
+  ],
+  "patients": [
+    {
+      "id": "3a268172-6c5c-4d9b-8964-8b9a1e531af5",
+      "name": "Juan",
+      "surname": "Rodriguez",
+      "dni": "123123",
+      "hospital_id": "9f8a5c90-cf1a-4ca3-9dea-c6a94174ae69"
+    },
+    {
+      "id": "8ec8c43b-f7e1-43e4-b70f-6d5a9799a86a",
+      "name": "Carlos",
+      "surname": "Lechon",
+      "dni": "333444",
+      "hospital_id": "c5d7cbea-55a4-4809-9969-82b148032a0e"
+    },
+    {
+      "id": "088d58e2-7691-47b6-a322-eeffcadc9054",
+      "name": "Andres",
+      "surname": "Lopez",
+      "dni": "222333",
+      "hospital_id": "b04fde75-59d8-457f-82b9-c25f2c64abfc"
+    },
+    {
+      "id": "923ec756-87b7-4743-808b-795a04b6dd21",
+      "name": "Diana",
+      "surname": "Pintor",
+      "dni": "555666",
+      "hospital_id": "9f8a5c90-cf1a-4ca3-9dea-c6a94174ae69"
+    },
+    {
+      "id": "508fb53c-c212-453f-ab17-cf56049f5a2c",
+      "name": "Raquel",
+      "surname": "Dueñas",
+      "dni": "666777",
+      "hospital_id": "9f8a5c90-cf1a-4ca3-9dea-c6a94174ae69"
+    },
+    {
+      "id": "623f492d-a42c-481e-bf21-c0acbc1b90f8",
+      "name": "Mario Alejandro",
+      "surname": "Arcentales",
+      "dni": "777888",
+      "hospital_id": "db6da10f-4ec4-468a-ad46-36a407480fa7"
+    },
+    {
+      "id": "a1965d07-caae-407d-8df1-060e88015932",
+      "name": "Ana",
+      "surname": "Durcal",
+      "dni": "555555",
+      "hospital_id": "d2dc1154-1329-4e56-a5c3-8e88b63f3c4a"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "014bd297-0a3d-4a17-b207-cff187690045",
+      "name": "Dr Pedro",
+      "surname": "Garcia",
+      "speciality": "Medico de cabecera"
+    }, {
+      "id": "a0f54d52-5ccb-4e50-adca-5ea0064262fd",
+      "name": "Dra Cristina",
+      "surname": "Pozo",
+      "speciality": "Medico de cabecera"
+    }, {
+      "id": "1497d1be-577a-41ad-b129-45271e113cc0",
+      "name": "Dra Luisa",
+      "surname": "Alarcon",
+      "speciality": "Traumatologo"
+    }, {
+      "id": "9bb2e300-fa15-4063-a291-13f7199ddb52",
+      "name": "Dra Patricia",
+      "surname": "Sanchez",
+      "speciality": "Reumatologo"
+    }, {
+      "id": "fc4ba036-8a70-4c6e-9b23-dd2a8035c142",
+      "name": "Dr Miguel",
+      "surname": "Duran",
+      "speciality": "Traumatologo"
+    }, {
+      "id": "5ba70d7d-67fc-430c-ab39-1b62e12f2346",
+      "name": "Dra Amelia",
+      "surname": "Huertas",
+      "speciality": "Cardiologo"
+    }, {
+      "id": "8f5cb256-7f39-4293-817a-b5e50a0e0062",
+      "name": "Dr Casimiro",
+      "surname": "Llorente",
+      "speciality": "Neumologo"
+    }
+  ]
+}
