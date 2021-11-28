@@ -12,20 +12,22 @@
 - Desarrollar las 4 operaciones CRUD (Create, Read, Update and Delete) a través de un ODM
 - Practicar con un ODM para realizar queries
 - Afianzar las ventajas de usar ODMs en el desarrollo de aplicaciones
+- Realizar consultas semánticas usando SPARQL
 
 ## 2. Dependencias
 
 Para realizar la práctica el alumno deberá tener instalado en su ordenador:
 - Entorno de ejecución de Python 3 [Python](https://www.python.org/downloads/)
 - Base de datos MongoDB [MongoDB](https://www.mongodb.com/try/download/community)
+- Base de datos [Fuseki](https://jena.apache.org/documentation/fuseki2/)
 
 ## 3. Descripción de la práctica
 
-La práctica simula una aplicación de gestión de pacientes basada en el patron MVC (Modelo-Vista-Controlador) utlizando la librería Flask de python. La práctica tambien usa MongoEngine como ODM para poder almacenar los datos de la aplicación en MongoDB.
+La práctica simula una aplicación de gestión de pacientes basada en el patron MVC (Modelo-Vista-Controlador) utlizando la librería Flask de python. La práctica tambien usa MongoEngine como ODM para poder almacenar los datos de la aplicación en MongoDB, y conexiones a un endpoint SPARQL mediante `SPARQLWrapper`.
 
 La **vista** es una interfaz web basada en HTML y CSS que permite realizar diversas acciones sobre los pacientes como crear, editar, buscar, filtrar, listar o eliminar. La vista esta incluida ya en el codigo descargado.
 
-El **modelo** es la representación de la información de los pacientes. En esta apliación se van a usar tres modelos: doctor, hospital y patient. Un ejemplo de como están definidos los modelos en esta práctica es el siguiente (la definición de todos los modelos se encuentra en models.py):
+El **modelo** es la representación de la información de los pacientes. En esta aplicación se van a usar tres modelos: doctor, hospital y patient. Un ejemplo de como están definidos los modelos en esta práctica es el siguiente (la definición de todos los modelos se encuentra en `models.py`):
 
 ```
 class Patient(db.Document):
@@ -39,13 +41,13 @@ class Patient(db.Document):
 
 El **controlador** ejecuta acciones sobre los modelos. El alumno deberá desarrollar varias funciones del controlador para que las acciones que se realicen a través de la página web funcionen correctamente. Para ello, desarrollara las operaciones correspondientes con MongoEngine implementando las operaciones CRUD sobre los objetos patiente, hospital y doctor, así como otra serie de queries.
 
-En el siguiente video puede observar cual sería el funcionamiento normal de la aplicación [link](https://youtu.be/8xXaFCRxMXE)
+En el siguiente video puede observar cuál sería el funcionamiento normal de la aplicación [link](https://youtu.be/8xXaFCRxMXE)
 
 ## 4. Descargar e instalar el código del proyecto
 
 Abra un terminal en su ordenador y siga los siguientes pasos.
 
-Descarguese y descomprima el código pinchando más arriba en el botón code y eligiendo opción "Download ZIP".
+Descárguese y descomprima el código pinchando más arriba en el botón code y eligiendo opción "Download ZIP".
 
 Navegue a través de un terminal a la carpeta P4_ODM_FLASK_BDNR.
 ```
@@ -103,19 +105,23 @@ Abra un navegador y vaya a la url "http://localhost:5000" para ver la aplicació
 ## 5. Tareas a realizar
 
 
-El alumno deberá editar dos ficheros:
+El alumno deberá editar el fichero `flaksr.run.py`.
 
-- flaskr/run.py. Se le provee un esqueleto con todos los funciones que deberá rellenar. En cada uno de estas funciones se deberá hacer uso del ODM MongoEngine para realizar operaciones con la base de datos y devolver un resultado de la operación.
+Primero, deberá definir la URI de Conexión a la base de datos con nombre **odm_bbdd** :
 
-Definir la URI de Conexión a la base de datos con nombre **odm_bbdd** :
+```
+app.config['MONGODB_SETTINGS'] = {### Definir la URI de la BBDD}
+```
 
-```app.config['MONGODB_SETTINGS'] = {### Definir la URI de }```
+Después, se le provee un esqueleto con todas los funciones que deberá rellenar.
+En cada una de estas funciones se deberá hacer uso del ODM MongoEngine o de SPARQL para realizar operaciones con la base de datos y devolver un resultado de la operación.
 
-En cuanto a las funciones que debe editar en run.js debe hacer lo siguiente:
+
+Las funciones son las siguientes:
 
 ### show_hospitals()
 
-**Descipcion:**
+**Descripción:**
 - Busca en la base de datos todos los hospitales existentes en la coleccion "Hospital"
 
 **Parametros:**
@@ -128,7 +134,7 @@ En cuanto a las funciones que debe editar en run.js debe hacer lo siguiente:
 
 ### filterHospitalsByCity()
 
-**Descipcion:**
+**Descripción:**
 - Busca en la colección "Hospital" filtrando por ciudad
 - Para acceder a la ciudad debe usar :
 ```
@@ -144,7 +150,7 @@ city = request.form['city']
 
 ### list_hospital_patients(hospital_id)
 
-**Descipcion:**
+**Descripción:**
 - Busca todos los pacientes correspondientes a un hospital ordenados por el nombre (de la A a la Z)
 
 **Parametros:**
@@ -157,7 +163,7 @@ city = request.form['city']
 
 ### read_patient(hospital_id, patient_id)
 
-**Descipcion:**
+**Descripción:**
 - Busca los datos de un paciente
 
 **Parametros:**
@@ -171,7 +177,7 @@ city = request.form['city']
 
 ### create_patient(hospital_id)
 
-**Descipcion:**
+**Descripción:**
 - Crea un paciente dentro de un hospital
 
 **Parametros:**
@@ -192,7 +198,7 @@ id = uuid.uuid4()
 
 ### update_patient(hospital_id, patient_id)
 
-**Descipcion:**
+**Descripción:**
 - Actualiza los datos del paciente identificado por patient_id
 
 **Parametros:**
@@ -209,7 +215,7 @@ id = uuid.uuid4()
 
 ### delete_patient(patient_id)
 
-**Descipcion:**
+**Descripción:**
 - Borra un paciente de la base de datos
 
 **Parametros:**
@@ -222,7 +228,7 @@ id = uuid.uuid4()
 
 ### assignDoctor(hospital_id, patient_id)
 
-**Descipcion:**
+**Descripción:**
 - Asigna un medico a un paciente en la base de datos.
 - Para acceder al id del doctor puede usar:
 ```
@@ -239,7 +245,7 @@ doctor_id = request.form['doctor']
 
 ### show_patient_doctors(hospital_id, patient_id)
 
-**Descipcion:**
+**Descripción:**
 - Devuelve los doctores que estan asignados a un paciente.
 
 **Parametros:**
@@ -251,11 +257,21 @@ doctor_id = request.form['doctor']
 
 - Un array de objetos de doctores 
 
+### show_hospital(hospital_id)
+
+Esta función será la encargada de mostrar información sobre un hospital en particular.
+A diferencia del resto de apartados, en este caso la información se conseguirá de una fuente semántica: DBpedia.
+
+Para ello, primero deberá recuperar el hospital (usando el ODM), para de esa forma acceder a su IRI.
+Mediante la función `sparql` (importada de `models`), debe realizar una consulta SPARQL a DBpedia, conteniendo al menos 6 elementos de información sobre el hospital. p.e., dirección de contacto, número de camas en el hospital, año de apertura, etc.
+
+Se proporciona una consulta de prueba en la que se muestra el nombre (etiqueta) del hospital, y que deberá modificar.
 
 ## 7. Instrucciones para la Entrega y Evaluación.
 
 El alumno deberá subir a Moodle únicamente el fichero *run.py* con las modificaciones realizadas. 
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
--  **1 punto por cada uno de las siguientes funciones realizadas:**  list_hospitals, filterHospitalsByCity, list_hospital_patients, read, create, update y delete
--  **1,5 puntos por cada uno de las siguientes funciones realizadas:**  assignDoctor y showPatientDoctors 
+-  **0.5 puntos por cada uno de las siguientes funciones realizadas:**  `list_hospitals`, `filterHospitalsByCity`, `list_hospital_patients`, `read`, `create`, `update` y `delete`.
+-  **2 puntos por cada uno de las siguientes funciones realizadas:**  `assignDoctor`, `showPatientDoctors`.
+- **2.5 puntos** por la función `show_hospital`.

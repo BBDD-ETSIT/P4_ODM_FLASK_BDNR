@@ -60,10 +60,11 @@
                 <div class="form-group">
                   <label>Ciudad</label>
                   <select class="form-control" name="city">
+                      <!-- TODO: hacer que la lista de ciudades se autogenere -->
                     <option value='Madrid'>Madrid</option>
                     <option value='Barcelona'>Barcelona</option>
-                    <option value='Segovia'>Segovia</option>
-                    <option value='Toledo'>Toledo</option>
+                    <option value='Sevilla'>Sevilla</option>
+                    <option value='San Cristóbal de la Laguna'>San Cristóbal de la Laguna</option>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary filter-button"><b>Filtrar</b></button>
@@ -88,7 +89,8 @@
                   <div class="card-body">
                     <h4 class="card-title"><b>{{ hospital.name }}</b></h4>
                     <h6 class="card-subtitle mb-2 text-muted">{{ hospital.city }}</h6>
-                    <button class="btn btn-primary show-patients" onclick="location.href='/hospitals/{{ hospital.id }}/patients'"><b>Ver pacientes</b></button>
+                    <button class="btn btn-primary" onclick="location.href='/hospitals/{{ hospital.id }}/show'"><b>Ver Información</b></button>
+                    <button class="btn btn-primary" onclick="location.href='/hospitals/{{ hospital.id }}/patients'"><b>Ver pacientes</b></button>
                   </div>
                 </div>
               {% endfor -%}

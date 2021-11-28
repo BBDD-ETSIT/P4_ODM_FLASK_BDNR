@@ -2,24 +2,29 @@
   "hospitals": [
     {
       "id": "9f8a5c90-cf1a-4ca3-9dea-c6a94174ae69",
+      "iri": "http://dbpedia.org/resource/Hospital_Universitario_La_Paz",
       "name": "Hospital Univesitario La Paz",
       "city": "Madrid"
     },{
       "id": "b04fde75-59d8-457f-82b9-c25f2c64abfc",
-      "name": "Hospital Carlos III",
-      "city": "Madrid"
+      "iri": "http://dbpedia.org/resource/Hospital_Universitario_de_Canarias",
+      "name": "Hospital Universitario de Canarias",
+      "city": "San Cristóbal de la Laguna"
     },{
       "id": "c5d7cbea-55a4-4809-9969-82b148032a0e",
-      "name": "Hospital del Mar",
-      "city": "Barcelona"
+      "name": "Hospital General Universitario Gregorio Marañón",
+      "iri": "http://dbpedia.org/resource/Hospital_General_Universitario_Gregorio_Mara%C3%B1%C3%B3n",
+      "city": "Madrid"
     },{
       "id": "db6da10f-4ec4-468a-ad46-36a407480fa7",
-      "name": "Complejo Asistencial de Segovia",
-      "city": "Segovia"
+      "name": "Hospital Universitario Virgen del Rocío",
+      "iri": "http://dbpedia.org/resource/Hospital_Universitario_Virgen_del_Roc%C3%ADo",
+      "city": "Sevilla"
     },{
       "id": "d2dc1154-1329-4e56-a5c3-8e88b63f3c4a",
-      "name": "Hospital Virgen de la Salud",
-      "city": "Toledo"
+      "name": "Hospital Clínic de Barcelona",
+      "iri": "http://dbpedia.org/resource/Hospital_Cl%C3%ADnic_de_Barcelona",
+      "city": "Barcelona"
     }
   ],
   "patients": [

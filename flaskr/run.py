@@ -11,7 +11,7 @@ app.config['MONGODB_SETTINGS'] = {}
 db = MongoEngine()
 db.init_app(app)
 
-from models import Hospital, Patient, Doctor
+from models import Hospital, Patient, Doctor, sparql
 
 @app.route("/")
 def index():
@@ -100,6 +100,22 @@ def show_patient_doctors(hospital_id,patient_id):
     
     return render_template("show_doctors.html",doctors=patient.doctors, patient= patient_id)
 
+# Mostrar la información registrada para un hospital
+@app.route('/hospitals/<hospital_id>/show',methods=['GET'])
+def show_hospital(hospital_id):
+    ### TAREA: Recuperar el hospital  ###
+    ### TAREA: Modificar la consulta para recuperar información útil ###
+    query = '''
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            SELECT *
+            WHERE {
+                <%s> rdfs:label ?label .
+    FILTER(LANG(?label) = 'en')
+            }
+    ''' % hospital.iri
+    hospital_info = sparql(query)
+    return render_template("show_hospital.html", hospital_info=hospital_info)
+
 ################### Espacio para seeders ############################
 
 def seeder():
@@ -114,7 +130,7 @@ def seeder():
             data = json.load(f)
 
         for hospital in data['hospitals']:
-            new_hospital = Hospital(id=hospital['id'],name=hospital['name'], city=hospital['city'])
+            new_hospital = Hospital(**hospital)
             new_hospital.save()
 
         doctors = {}
