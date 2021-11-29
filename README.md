@@ -267,9 +267,28 @@ Mediante la función `sparql` (importada de `models`), debe realizar una consult
 
 Se proporciona una consulta de prueba en la que se muestra el nombre (etiqueta) del hospital, y que deberá modificar.
 
-## 7. Instrucciones para la Entrega y Evaluación.
+## 7. Tarea opcional
+
+En la última tarea, estamos consultando DBpedia, un servicio externo.
+Para evitar que nuestra aplicación deje de funcionar si el servicio deja de estar disponible, vamos a descargar los datos y a cargarlos en nuestra propia base de datos (Fuseki).
+También adaptaremos el código para que la consulta se realice a nuestro servidor, en lugar de a DBpedia.
+
+Para ello, debemos seguir los siguientes pasos:
+
+* Lanzar una instancia local de Fuseki, usando la versión standalone o la imagen de docker.
+* Crear un dataset nuevo en la instancia local (p.e., `hospitales`).
+* Modificar la llamada a `sparql` dentro de `run.py` para que use el endpoint de la instancia local (p.e. `sparql(query=query, endpoint='http://localhost:3000/hospitales/sparql')`.
+* Descargar la información necesaria sobre los hospitales desde DBpedia. La descarga se puede realizar desde la página de DBpedia de cada hospital.
+* Cargar la información descargada en la instancia local de Fuseki.
+* Comprobar que las consultas siguen funcionando correctamente.
+* Exportar toda la información en un solo fichero, `hospitales.ttl`.
+
+El fichero resultante se subirá a la tarea de Moodle.
+
+## 8. Instrucciones para la Entrega y Evaluación.
 
 El alumno deberá subir a Moodle únicamente el fichero *run.py* con las modificaciones realizadas. 
+Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
 -  **0.5 puntos por cada uno de las siguientes funciones realizadas:**  `list_hospitals`, `filterHospitalsByCity`, `list_hospital_patients`, `read`, `showPatientDoctors` y `delete`.
