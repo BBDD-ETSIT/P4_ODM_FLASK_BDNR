@@ -13,17 +13,17 @@
     },{
       "id": "c5d7cbea-55a4-4809-9969-82b148032a0e",
       "name": "Hospital General Universitario Gregorio Marañón",
-      "iri": "http://dbpedia.org/resource/Hospital_General_Universitario_Gregorio_Mara%C3%B1%C3%B3n",
+      "iri": "http://dbpedia.org/resource/Hospital_General_Universitario_Gregorio_Marañón",
       "city": "Madrid"
     },{
       "id": "db6da10f-4ec4-468a-ad46-36a407480fa7",
       "name": "Hospital Universitario Virgen del Rocío",
-      "iri": "http://dbpedia.org/resource/Hospital_Universitario_Virgen_del_Roc%C3%ADo",
+      "iri": "http://dbpedia.org/resource/Hospital_Universitario_Virgen_del_Rocío",
       "city": "Sevilla"
     },{
       "id": "d2dc1154-1329-4e56-a5c3-8e88b63f3c4a",
       "name": "Hospital Clínic de Barcelona",
-      "iri": "http://dbpedia.org/resource/Hospital_Cl%C3%ADnic_de_Barcelona",
+      "iri": "http://dbpedia.org/resource/Hospital_Clínic_de_Barcelona",
       "city": "Barcelona"
     }
   ],
