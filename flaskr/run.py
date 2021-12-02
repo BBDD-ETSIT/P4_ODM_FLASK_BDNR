@@ -21,7 +21,7 @@ def index():
 def show_home():
     return redirect("/hospitals")
 
-# Buscar todos los hospitales 
+# Buscar todos los hospitales
 @app.route("/hospitals")
 def show_hospitals():
     ### TAREA: Complete la función a partir de aquí ###
@@ -66,7 +66,7 @@ def create_edited_patient(hospital_id,patient_id):
     patient = Patient.objects.get(id=patient_id)
     return render_template("edit.html",hospital=hospital_id, patient= patient)
 
-# Actualiza un paciente 
+# Actualiza un paciente
 @app.route('/hospitals/<hospital_id>/patients/<patient_id>/updated', methods = ['POST','PUT'])
 def update_patient(hospital_id,patient_id):
     ### TAREA: Complete la función a partir de aquí ###
@@ -97,7 +97,7 @@ def pass_doctor(hospital_id,patient_id):
 @app.route('/hospitals/<hospital_id>/patients/<patient_id>/show_doctors',methods=['GET','POST'])
 def show_patient_doctors(hospital_id,patient_id):
     ### TAREA: Complete la función a partir de aquí ###
-    
+
     return render_template("show_doctors.html",doctors=patient.doctors, patient= patient_id)
 
 # Mostrar la información registrada para un hospital
@@ -125,7 +125,7 @@ def seeder():
     if (len(all_hospitals) <= 0):
         print('#### Collections are empty ####')
         print('#### Adding some entries... ####')
-        with open(os.path.join(os.path.dirname(__file__), 'seeders/seeders.json'), 'r') as f:
+        with open(os.path.join(os.path.dirname(__file__), 'seeders/seeders.json'), 'r', encoding='utf-8') as f:
             print('#### seeders.json file opened... ---####')
             data = json.load(f)
 
@@ -143,16 +143,16 @@ def seeder():
             new_patient = Patient(id=patient['id'], name=patient['name'], surname=patient['surname'], dni=patient['dni'])
             hospital = Hospital.objects.get(id=patient['hospital_id'])
             new_patient.hospital = hospital
-            if (patient['id'] == '3a268172-6c5c-4d9b-8964-8b9a1e531af5'): 
+            if (patient['id'] == '3a268172-6c5c-4d9b-8964-8b9a1e531af5'):
                 new_patient.doctors.append(doctors['014bd297-0a3d-4a17-b207-cff187690045'])
                 new_patient.doctors.append(doctors['9bb2e300-fa15-4063-a291-13f7199ddb52'])
-            elif (patient['id'] == '088d58e2-7691-47b6-a322-eeffcadc9054'): 
+            elif (patient['id'] == '088d58e2-7691-47b6-a322-eeffcadc9054'):
                 new_patient.doctors.append(doctors['a0f54d52-5ccb-4e50-adca-5ea0064262fd'])
-            elif (patient['id'] == '8ec8c43b-f7e1-43e4-b70f-6d5a9799a86a'): 
+            elif (patient['id'] == '8ec8c43b-f7e1-43e4-b70f-6d5a9799a86a'):
                 new_patient.doctors.append(doctors['1497d1be-577a-41ad-b129-45271e113cc0'])
-            elif (patient['id'] == '923ec756-87b7-4743-808b-795a04b6dd21'): 
+            elif (patient['id'] == '923ec756-87b7-4743-808b-795a04b6dd21'):
                 new_patient.doctors.append(doctors['9bb2e300-fa15-4063-a291-13f7199ddb52'])
-            new_patient.save()              
+            new_patient.save()
         print('#### Finished! ####')
     else:
         print('#### Database already seeded ####')
