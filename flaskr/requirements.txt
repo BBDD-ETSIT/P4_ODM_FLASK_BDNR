@@ -5,3 +5,4 @@ WTForms==2.3.3
 flask_mongoengine
 Flask-Seeder
 flask_debugtoolbar
+SparqlWrapper
