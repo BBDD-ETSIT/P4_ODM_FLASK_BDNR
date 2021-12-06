@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "Python: Flask",
+          "type": "python",
+          "request": "launch",
+          "module": "flask",
+          "python": "${workspaceRoot}/env/Scripts/python.exe",
+          "python.pythonPath": "${workspaceRoot}/env/Scripts/python.exe",
+          "env": {
+              "FLASK_APP": "flaskr/run.py",
+              "FLASK_ENV": "development"
+          },
+          "args": [
+              "run"
+          ],
+          "jinja": true
+      }
+  ]
+}
