@@ -38,6 +38,7 @@ class Patient(db.Document):
     hospital = db.ReferenceField(Hospital)
     doctors = db.ListField(db.ReferenceField("Doctor")) 
 ```
+Por sencillez se ha relacionado el paciente con el hospital y con el doctor. Y el doctor no tiene relación con el hospital más que a través de sus pacientes. Es decir en este modelo de uso el doctor puede atender en cualquier hospital. Es el paciente el que se asigna a un hospital (el que le corresponda por ejemplo por distrito) y luego se le asigna cualquier doctor.
 
 El **controlador** ejecuta acciones sobre los modelos. El alumno deberá desarrollar varias funciones del controlador para que las acciones que se realicen a través de la página web funcionen correctamente. Para ello, desarrollara las operaciones correspondientes con MongoEngine implementando las operaciones CRUD sobre los objetos patiente, hospital y doctor, así como otra serie de queries.
 
@@ -100,20 +101,35 @@ Abra un navegador y vaya a la url "http://localhost:5000" para ver la aplicació
 
 **NOTA: Cada vez que se quiera realizar una prueba del código desarrollado, debemos parar y arrancar de nuevo la practica. Para ello, desde el terminal pulse ctrl+c para parar y arranque de nuevo con npm start**
 
-**NOTA2: Si ha modificado alguna tabla de manera indeseada y se quiere volver a restablecer los valores por defecto, borre la base de datos odm_bddd y vuelva a arrancar el servidor con flask.**
+**NOTA2: Si ha modificado alguna tabla de manera indeseada y se quiere volver a restablecer los valores por defecto, borre la base de datos que ha creado y vuelva a arrancar el servidor con flask.**
 
 ## 5. Tareas a realizar
 
+La primera tarea es inspeccionar todo el código provisto y entender donde están los modelos, las vistas y los controladores, asi como la semilla o seeders.
 
-El alumno deberá editar el fichero `flaksr.run.py`.
 
-Primero, deberá definir la URI de Conexión a la base de datos con nombre **odm_bbdd** :
+
+### 5.1 Conectar a la base de datos adecuada y añadir en el seed un nuevo médico
+ Primero hay que conseguir conectar a la base de datos, deberá definir la URI de Conexión a la base de datos con nombre **hospitales_NOMBREALUMNO** por ejemplo para Enrique Barra la base de datos se llamaría **hospitales_Enrique**
 
 ```
 app.config['MONGODB_SETTINGS'] = {### Definir la URI de la BBDD}
 ```
+En este punto podremos comprobar que la aplicación funciona con 
+```
+$ flask run
+```
+Al hacer esto veremos que nos llena la base de datos con los seed (semilla), que son los datos iniciales de la aplicación. 
+Una vez hecho esto tendremos que entrar con mongosh y borrar la base de datos **hospitales_NOMBREALUMNO**, para que así podamos hacer el siguiente paso, que es añadir datos al seed y que al arrancar la aplicación los cree porque detectará que no existe la base de datos (ver primeras líneas del método seeder de `flaksr/run.py`)
 
-Después, se le provee un esqueleto con todas los funciones que deberá rellenar.
+En este momento tendremos que editar el fichero `flaksr/seeders/seeders.json` y añadir un nuevo doctor con nuestros datos, nos inventamos el id y la especialidad. 
+Una vez hecho esto al volver a arrancar la aplicación con "flask run" cargará este nuevo doctor en la base de datos con el seeder.
+En este momento accedemos a la base de datos con mongosh y hacemos una query para buscar este nuevo doctor. Y hacemos una captura de pantalla (CAPTURA1) donde se vean sus datos en la mongo shell.
+
+
+### 5.2 Rellenar las funciones del controlador que atacan a la base de datos usando los modelos
+
+Se provee un esqueleto con todas los funciones que deberá rellenar. El alumno deberá editar el fichero `flaksr/run.py`.
 En cada una de estas funciones se deberá hacer uso del ODM MongoEngine o de SPARQL para realizar operaciones con la base de datos y devolver un resultado de la operación.
 
 
@@ -121,67 +137,49 @@ Las funciones son las siguientes:
 
 ### show_hospitals()
 
-**Descripción:**
-- Busca en la base de datos todos los hospitales existentes en la coleccion "Hospital"
+**Descripción:** Busca en la base de datos todos los hospitales existentes en la coleccion "Hospital"
 
-**Parametros:**
+**Parametros:** Ninguno
 
-- Ninguno
-
-**Returns:**
-
-- Un array de objetos de hospitales
+**Returns:** Un array de objetos de hospitales
 
 ### filterHospitalsByCity()
 
-**Descripción:**
+**Descripción:** 
+
 - Busca en la colección "Hospital" filtrando por ciudad
 - Para acceder a la ciudad debe usar :
 ```
 city = request.form['city']
 ```
-**Parametros:**
+**Parametros:** Ninguno
 
-- Ninguno
-
-**Returns:**
-
-- Un array de objetos de hospitales
+**Returns:** Un array de objetos de hospitales
 
 ### list_hospital_patients(hospital_id)
 
-**Descripción:**
-- Busca todos los pacientes correspondientes a un hospital ordenados por el nombre (de la A a la Z)
+**Descripción:** Busca todos los pacientes correspondientes a un hospital ordenados por el nombre (de la A a la Z)
 
-**Parametros:**
+**Parametros:** hospital_id - Id del hospital
 
-- hospital_id - Id del hospital
-
-**Returns:**
-
-- Un array de objetos de pacientes
+**Returns:** Un array de objetos de pacientes
 
 ### read_patient(hospital_id, patient_id)
 
-**Descripción:**
-- Busca los datos de un paciente
+**Descripción:** Busca los datos de un paciente
 
 **Parametros:**
 
 - hospital_id - Id del hospital
 - patient_id - Id del paciente a actualizar
 
-**Returns:**
-
-- Un objeto paciente
+**Returns:** Un objeto paciente
 
 ### create_patient(hospital_id)
 
-**Descripción:**
-- Crea un paciente dentro de un hospital
+**Descripción:** Crea un paciente dentro de un hospital
 
 **Parametros:**
-
 
 - id - id del Paciente, debe generarse con:
 ```
@@ -192,14 +190,11 @@ id = uuid.uuid4()
 - dni - DNI del paciente
 - hospital_id - Id del hospital
 
-**Returns:**
-
-- El objeto paciente creado
+**Returns:** El objeto paciente creado
 
 ### update_patient(hospital_id, patient_id)
 
-**Descripción:**
-- Actualiza los datos del paciente identificado por patient_id
+**Descripción:** Actualiza los datos del paciente identificado por patient_id
 
 **Parametros:**
 
@@ -209,26 +204,20 @@ id = uuid.uuid4()
 - surname - Apellido del paciente 
 - dni - DNI del paciente
 
-**Returns:**
-
-- El objeto paciente actualizado
+**Returns:** El objeto paciente actualizado
 
 ### delete_patient(patient_id)
 
-**Descripción:**
-- Borra un paciente de la base de datos
+**Descripción:** Borra un paciente de la base de datos
 
-**Parametros:**
+**Parametros:** patient_id - Id del paciente
 
-- patient_id - Id del paciente
-
-**Returns:**
-
-- El resultado de la operación de borrado
+**Returns:** El resultado de la operación de borrado
 
 ### assignDoctor(hospital_id, patient_id)
 
 **Descripción:**
+
 - Asigna un medico a un paciente en la base de datos.
 - Para acceder al id del doctor puede usar:
 ```
@@ -239,23 +228,27 @@ doctor_id = request.form['doctor']
 - patient_id - Id del paciente
 - hospital_id - Id del hospital
 
-**Returns:**
-
-- Devuelve los datos del paciente al que se le ha asignado el medico
+**Returns:** Devuelve los datos del paciente al que se le ha asignado el medico
 
 ### show_patient_doctors(hospital_id, patient_id)
 
-**Descripción:**
-- Devuelve los doctores que estan asignados a un paciente.
+**Descripción:** Devuelve los doctores que estan asignados a un paciente.
 
 **Parametros:**
 
 - patient_id - Id del paciente
 - hospital_id - Id del hospital
 
-**Returns:**
+**Returns:** Un array de objetos de doctores 
 
-- Un array de objetos de doctores 
+
+### 5.3 Añadir un campo nuevo al modelo paciente y usarlo al asignar doctor
+
+En este momento queremos añadir un campo tipo booleano al modelo paciente, el campo se llama `premium` y tiene que ser `db.BooleanField()` (no ponga required=True porque los pacientes existentes no tienen este campo).
+Edite `flaskr/models.py` para añadir este campo.
+Compruebe el contenido de `flaskr/templates/show.html` y vea que sobre la línea 90 hay una condición que si el paciente tiene el campo premium a true muestra dicha información.
+Edite `flaskr/run.py` para que cuando el doctor asignado es el nuevo que añadimos en el seed ponga el campo premium a true (y por lo tanto al visualizar el paciente saldrá la fila adecuada). 
+En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muestre que en primer lugar ha añadido un paciente nuevo inventado por usted, con datos inventados, le asigna el doctor que añadió al seeder y muestra el paciente.
 
 ### show_hospital(hospital_id)
 
@@ -277,7 +270,7 @@ Para ello, debemos seguir los siguientes pasos:
 
 * Lanzar una instancia local de Fuseki, usando la versión standalone o la imagen de docker.
 * Crear un dataset nuevo en la instancia local (p.e., `hospitales`).
-* Modificar la llamada a `sparql` dentro de `run.py` para que use el endpoint de la instancia local (p.e. `sparql(query=query, endpoint='http://localhost:3000/hospitales/sparql')`.
+* Modificar la llamada a `sparql` dentro de `run.py` para que use el endpoint de la instancia local (p.e. `sparql(query=query, endpoint='http://localhost:3000/hospitales_NOMBREALUMNO/sparql')`.
 * Descargar la información necesaria sobre los hospitales desde DBpedia. La descarga se puede realizar desde la página de DBpedia de cada hospital.
 * Cargar la información descargada en la instancia local de Fuseki.
 * Comprobar que las consultas siguen funcionando correctamente.
