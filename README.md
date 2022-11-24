@@ -288,8 +288,8 @@ El alumno deberá subir a Moodle únicamente el fichero *run.py* con las modific
 Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
--  **0.5 puntos por añadir en el seeder el doctor con sus datos personales y conectar a la base de datos con su nombre.
+-  **0.5 puntos por añadir en el seeder el doctor con sus datos personales y conectar a la base de datos con su nombre.**
 -  **0.5 puntos por cada uno de las siguientes funciones realizadas:**  `list_hospitals`, `filterHospitalsByCity`, `list_hospital_patients`, `read`, `showPatientDoctors` y `delete`.
 -  **1 puntos por cada uno de las siguientes funciones realizadas:**  , `create_patient` y `update_patient`
--  **2 puntos por la función `assignDoctor` con la funcionalidad requerida en el punto 5.2
+-  **2 puntos por la función `assignDoctor` con la funcionalidad requerida en el punto 5.2**
 -  **2.5 puntos** por la función `show_hospital`.
