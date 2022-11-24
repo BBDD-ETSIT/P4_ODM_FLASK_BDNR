@@ -245,9 +245,13 @@ doctor_id = request.form['doctor']
 ### 5.3 Añadir un campo nuevo al modelo paciente y usarlo al asignar doctor
 
 En este momento queremos añadir un campo tipo booleano al modelo paciente, el campo se llama `premium` y tiene que ser `db.BooleanField()` (no ponga required=True porque los pacientes existentes no tienen este campo).
-Edite `flaskr/models.py` para añadir este campo.
-Compruebe el contenido de `flaskr/templates/show.html` y vea que sobre la línea 90 hay una condición que si el paciente tiene el campo premium a true muestra dicha información.
-Edite `flaskr/run.py` para que cuando el doctor asignado es el nuevo que añadimos en el seed ponga el campo premium a true (y por lo tanto al visualizar el paciente saldrá la fila adecuada). 
+
+- Edite `flaskr/models.py` para añadir este campo.
+
+- Compruebe el contenido de `flaskr/templates/show.html` y vea que sobre la línea 90 hay una condición que si el paciente tiene el campo premium a true muestra dicha información.
+
+- Edite `flaskr/run.py` para que cuando el doctor asignado es el nuevo que añadimos en el seed ponga el campo premium a true (y por lo tanto al visualizar el paciente saldrá la fila adecuada). 
+
 En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muestre que en primer lugar ha añadido un paciente nuevo inventado por usted, con datos inventados, le asigna el doctor que añadió al seeder y muestra el paciente.
 
 ### show_hospital(hospital_id)
@@ -284,6 +288,8 @@ El alumno deberá subir a Moodle únicamente el fichero *run.py* con las modific
 Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
+-  **0.5 puntos por añadir en el seeder el doctor con sus datos personales y conectar a la base de datos con su nombre.
 -  **0.5 puntos por cada uno de las siguientes funciones realizadas:**  `list_hospitals`, `filterHospitalsByCity`, `list_hospital_patients`, `read`, `showPatientDoctors` y `delete`.
--  **1.5 puntos por cada uno de las siguientes funciones realizadas:**  `assignDoctor`, `create_patient` y `update_patient`
-- **2.5 puntos** por la función `show_hospital`.
+-  **1 puntos por cada uno de las siguientes funciones realizadas:**  , `create_patient` y `update_patient`
+-  **2 puntos por la función `assignDoctor` con la funcionalidad requerida en el punto 5.2
+-  **2.5 puntos** por la función `show_hospital`.
