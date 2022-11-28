@@ -241,6 +241,16 @@ doctor_id = request.form['doctor']
 
 **Returns:** Un array de objetos de doctores 
 
+### show_hospital(hospital_id)
+
+Esta función será la encargada de mostrar información sobre un hospital en particular.
+A diferencia del resto de apartados, en este caso la información se conseguirá de una fuente semántica: DBpedia.
+
+Para ello, primero deberá recuperar el hospital (usando el ODM), para de esa forma acceder a su IRI.
+Mediante la función `sparql` (importada de `models`), debe realizar una consulta SPARQL a DBpedia, conteniendo al menos 6 elementos de información sobre el hospital. p.e., dirección de contacto, número de camas en el hospital, año de apertura, etc.
+
+Se proporciona una consulta de prueba en la que se muestra el nombre (etiqueta) del hospital, y que deberá modificar.
+
 
 ### 5.3 Añadir un campo nuevo al modelo paciente y usarlo al asignar doctor
 
@@ -254,19 +264,11 @@ En este momento queremos añadir un campo tipo booleano al modelo paciente, el c
 
 En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muestre que en primer lugar ha añadido un paciente nuevo inventado por usted, con datos inventados, le asigna el doctor que añadió al seeder y muestra el paciente.
 
-### show_hospital(hospital_id)
 
-Esta función será la encargada de mostrar información sobre un hospital en particular.
-A diferencia del resto de apartados, en este caso la información se conseguirá de una fuente semántica: DBpedia.
-
-Para ello, primero deberá recuperar el hospital (usando el ODM), para de esa forma acceder a su IRI.
-Mediante la función `sparql` (importada de `models`), debe realizar una consulta SPARQL a DBpedia, conteniendo al menos 6 elementos de información sobre el hospital. p.e., dirección de contacto, número de camas en el hospital, año de apertura, etc.
-
-Se proporciona una consulta de prueba en la que se muestra el nombre (etiqueta) del hospital, y que deberá modificar.
 
 ## 7. Tarea opcional
 
-En la última tarea, estamos consultando DBpedia, un servicio externo.
+En la última función de la tarea 5.2, estamos consultando DBpedia, un servicio externo.
 Para evitar que nuestra aplicación deje de funcionar si el servicio deja de estar disponible, vamos a descargar los datos y a cargarlos en nuestra propia base de datos (Fuseki).
 También adaptaremos el código para que la consulta se realice a nuestro servidor, en lugar de a DBpedia.
 
@@ -284,7 +286,7 @@ El fichero resultante se subirá a la tarea de Moodle.
 
 ## 8. Instrucciones para la Entrega y Evaluación.
 
-El alumno deberá subir a Moodle únicamente el fichero *run.py* con las modificaciones realizadas. 
+El alumno deberá subir a Moodle las *capturas* solicitadas y el fichero *run.py* con las modificaciones realizadas. 
 Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
