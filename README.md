@@ -260,7 +260,7 @@ En este momento queremos añadir un campo tipo booleano al modelo paciente, el c
 
 - Compruebe el contenido de `flaskr/templates/show.html` y vea que sobre la línea 90 hay una condición que si el paciente tiene el campo premium a true muestra dicha información.
 
-- Edite `flaskr/run.py` para que cuando el doctor asignado es el nuevo que añadimos en el seed ponga el campo premium a true (y por lo tanto al visualizar el paciente saldrá la fila adecuada). 
+- Edite el método `assign_doctor` que se encuentra en el fichero `flaskr/run.py` para que cuando el doctor asignado sea el nuevo que añadimos en el seed ponga el campo premium a true (y por lo tanto al visualizar el paciente saldrá la fila adecuada). 
 
 En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muestre que en primer lugar ha añadido un paciente nuevo inventado por usted, con datos inventados, le asigna el doctor que añadió al seeder y muestra el paciente.
 
@@ -286,7 +286,7 @@ El fichero resultante se subirá a la tarea de Moodle.
 
 ## 7. Instrucciones para la Entrega y Evaluación.
 
-El alumno deberá subir a Moodle las **capturas** solicitadas y el fichero *run.py* con las modificaciones realizadas. 
+El alumno deberá subir a Moodle las **capturas** solicitadas y los ficheros *run.py*, *seeders.json* y *models.py* con las modificaciones realizadas (en total 5 ficheros incluyendo las capturas). 
 Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
