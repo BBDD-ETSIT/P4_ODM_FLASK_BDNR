@@ -266,7 +266,7 @@ En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muest
 
 
 
-## 7. Tarea opcional
+## 6. Tarea opcional
 
 En la última función de la tarea 5.2, estamos consultando DBpedia, un servicio externo.
 Para evitar que nuestra aplicación deje de funcionar si el servicio deja de estar disponible, vamos a descargar los datos y a cargarlos en nuestra propia base de datos (Fuseki).
@@ -284,9 +284,9 @@ Para ello, debemos seguir los siguientes pasos:
 
 El fichero resultante se subirá a la tarea de Moodle.
 
-## 8. Instrucciones para la Entrega y Evaluación.
+## 7. Instrucciones para la Entrega y Evaluación.
 
-El alumno deberá subir a Moodle las *capturas* solicitadas y el fichero *run.py* con las modificaciones realizadas. 
+El alumno deberá subir a Moodle las **capturas** solicitadas y el fichero *run.py* con las modificaciones realizadas. 
 Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
