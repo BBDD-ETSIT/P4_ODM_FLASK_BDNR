@@ -98,7 +98,7 @@ $ flask run
 ```
 
 
-Abra un navegador y vaya a la url "http://localhost:5000" para ver la aplicación de gestión de pacientes.
+Abra un navegador y vaya a la url "http://127.0.0.1:5000" para ver la aplicación de gestión de pacientes.
 
 **NOTA: Cada vez que se quiera realizar una prueba del código desarrollado, debemos parar y arrancar de nuevo la practica. Para ello, desde el terminal pulse ctrl+c para parar y arranque de nuevo con npm start**
 
