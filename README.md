@@ -29,7 +29,7 @@ La **vista** es una interfaz web basada en HTML y CSS que permite realizar diver
 
 El **modelo** es la representación de la información de los pacientes. En esta aplicación se van a usar tres modelos: doctor, hospital y patient. Un ejemplo de como están definidos los modelos en esta práctica es el siguiente (la definición de todos los modelos se encuentra en `models.py`):
 
-```
+```python
 class Patient(db.Document):
     id = db.StringField(primary_key=True, required=True)
     name = db.StringField(required=True)
@@ -88,6 +88,7 @@ Indicamos a Flask el fichero con el que arrancar el servidor:
 [LINUX/MAC] >  export FLASK_APP=flaskr/run.py
 [WINDOWS] > $env:FLASK_APP = "flaskr/run.py"
 ```
+
 Debemos tener arrancado MongoDB. Dependiendo de cómo lo hayamos instalado arrancará solo al iniciar la máquina o tendremos que ir a ejecutar el programa "mongod" a la carpeta bin donde hayamos realizado la instalación.
 
 Podemos arrancar el servidor con el siguiente comando. Hasta que no realize el primer ejercicio sobre la configuración de la URI, el servidor no arrancara.
@@ -247,7 +248,13 @@ Esta función será la encargada de mostrar información sobre un hospital en pa
 A diferencia del resto de apartados, en este caso la información se conseguirá de una fuente semántica: DBpedia.
 
 Para ello, primero deberá recuperar el hospital (usando el ODM), para de esa forma acceder a su IRI.
-Mediante la función `sparql` (importada de `models`), debe realizar una consulta SPARQL a DBpedia, conteniendo al menos 6 elementos de información sobre el hospital. p.e., dirección de contacto, número de camas en el hospital, año de apertura, etc.
+Mediante la función `sparql` (importada de `models`), debe realizar una consulta SPARQL a DBpedia, conteniendo al menos:
+
+- La descripción del hospital en español (en una variable `?descripcion`)
+- El nombre del hospital en español (variable `?nombre`)
+- Número de camas en el hospital (en la variable `?camas`_), debe tener un valor en blanco si no se encuentra
+
+Adicionalmente, se puede añadir más información, tal como el código postal, la región de referencia, o el número de habitantes de la ciudad en la que se encuentra el hospital.
 
 Se proporciona una consulta de prueba en la que se muestra el nombre (etiqueta) del hospital, y que deberá modificar.
 
@@ -265,28 +272,33 @@ En este momento queremos añadir un campo tipo booleano al modelo paciente, el c
 En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muestre que en primer lugar ha añadido un paciente nuevo inventado por usted, con datos inventados, le asigna el doctor que añadió al seeder y muestra el paciente.
 
 
-
-## 6. Tarea opcional
+## 6. Almacenar los datos de DBpedia
 
 En la última función de la tarea 5.2, estamos consultando DBpedia, un servicio externo.
-Para evitar que nuestra aplicación deje de funcionar si el servicio deja de estar disponible, vamos a descargar los datos y a cargarlos en nuestra propia base de datos (Fuseki).
+Para evitar que nuestra aplicación deje de funcionar si el servicio deja de estar disponible, vamos a descargar los datos en un grafo, que posteriormente podremos cargar en nuestra base de datos Fuseki.
 También adaptaremos el código para que la consulta se realice a nuestro servidor, en lugar de a DBpedia.
 
 Para ello, debemos seguir los siguientes pasos:
 
-* Lanzar una instancia local de Fuseki, usando la versión standalone o la imagen de docker.
-* Crear un dataset nuevo en la instancia local (p.e., `hospitales`).
-* Modificar la llamada a `sparql` dentro de `run.py` para que use el endpoint de la instancia local (p.e. `sparql(query=query, endpoint='http://localhost:3000/hospitales_NOMBREALUMNO/sparql')`.
 * Descargar la información necesaria sobre los hospitales desde DBpedia. La descarga se puede realizar desde la página de DBpedia de cada hospital.
-* Cargar la información descargada en la instancia local de Fuseki.
-* Comprobar que las consultas siguen funcionando correctamente.
-* Exportar toda la información en un solo fichero, `hospitales.ttl`.
+* Exportar toda la información descargada en un solo fichero en formato Turtle, `hospitales.ttl`.
 
-El fichero resultante se subirá a la tarea de Moodle.
+El fichero resultante (`hospitales.ttl`) se subirá a la tarea de Moodle.
+
+Opcionalmente, se puede (y se debería) comprobar que la información descargada es correcta siguiendo estos pasos:
+
+* Lanzar una instancia local de Fuseki, usando la versión standalone o la imagen de docker (ver transparencias).
+* Crear un dataset nuevo en la instancia local (p.e., `hospitales`).
+* Cargar la información descargada en la instancia local de Fuseki.
+* En este punto, realizar una captura de pantalla (CAPTURA3) mostrando la página del dataset creado, y el número de triplas contenidas
+* Modificar la llamada a `sparql` dentro de `run.py` para que use el endpoint de la instancia local (p.e. `sparql(query=query, endpoint='http://localhost:3000/hospitales/sparql')`.
+* Comprobar que las consultas siguen funcionando correctamente (es decir, la página se muestra igual que apuntando a DBpedia directamente)
+
+Si se ha realizado este paso, se añadirá el fichero CAPTURA3 a la entrega de moodle.
 
 ## 7. Instrucciones para la Entrega y Evaluación.
 
-El alumno deberá subir a Moodle las **capturas** solicitadas y los ficheros *run.py*, *seeders.json* y *models.py* con las modificaciones realizadas (en total 5 ficheros incluyendo las capturas). 
+El alumno deberá subir a Moodle las **capturas** solicitadas y los ficheros *run.py*, *seeders.json* y *models.py* con las modificaciones realizadas, además del fichero `hospitales.ttl` (en total 5 ficheros incluyendo las capturas). 
 Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre `hospitales.ttl`.
 
 **RÚBRICA**: Cada método que se pide resolver de la practica se puntuara de la siguiente manera:
@@ -294,4 +306,5 @@ Para la tarea opcional, se podrá subir adicionalmente un fichero con el nombre 
 -  **0.5 puntos por cada uno de las siguientes funciones realizadas:**  `list_hospitals`, `filterHospitalsByCity`, `list_hospital_patients`, `read`, `showPatientDoctors` y `delete`.
 -  **1 puntos por cada uno de las siguientes funciones realizadas:**  , `create_patient` y `update_patient`
 -  **2 puntos por la función `assignDoctor` con la funcionalidad requerida en el punto 5.2**
--  **2.5 puntos** por la función `show_hospital`.
+-  **1.5 puntos** por la función `show_hospital`.
+-  **1 punto** por capturar la información adecuada en el fichero `hospitales.ttl`.

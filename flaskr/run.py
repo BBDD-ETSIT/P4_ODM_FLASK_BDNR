@@ -103,18 +103,22 @@ def show_patient_doctors(hospital_id,patient_id):
 # Mostrar la información registrada para un hospital
 @app.route('/hospitals/<hospital_id>/show',methods=['GET'])
 def show_hospital(hospital_id):
-    ### TAREA: Recuperar el hospital  ###
-    ### TAREA: Modificar la consulta para recuperar información útil ###
-    query = '''
+    hospital = Hospital.objects.get(id=hospital_id)
+    query = f'''
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            SELECT *
-            WHERE {
-                <%s> rdfs:label ?label .
-    FILTER(LANG(?label) = 'en')
-            }
-    ''' % hospital.iri
+            SELECT DISTINCT ?nombre
+    # ¡ATENCIÓN!
+    # Hay que utilizar doble corchete en estas consultas, porque es una f-string
+            WHERE {{
+                <{hospital.iri}> rdfs:label ?nombre .
+            }}
+
+    '''
+    print(query)
     hospital_info = sparql(query)
-    return render_template("show_hospital.html", hospital_info=hospital_info)
+    return render_template("show_hospital.html",
+                           iri=hospital.iri,
+                           hospital_info=hospital_info)
 
 ################### Espacio para seeders ############################
 

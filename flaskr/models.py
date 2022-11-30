@@ -10,6 +10,7 @@ class Hospital(db.Document):
     iri = db.StringField(required=True)
     city = db.StringField(required=True)
 
+
 class Patient(db.Document):
     id = db.StringField(primary_key=True, required=True)
     name = db.StringField(required=True)
@@ -18,13 +19,14 @@ class Patient(db.Document):
     hospital = db.ReferenceField(Hospital)
     doctors = db.ListField(db.ReferenceField("Doctor")) 
 
+
 class Doctor(db.Document):
     id = db.StringField(primary_key=True, required=True)
     name = db.StringField(required=True)
     surname = db.StringField(required=True)
     speciality = db.StringField(required=True)
 
-def sparql(query, endpoint='http://dbpedia.org/sparql'):
+def sparql(query, endpoint='http://es.dbpedia.org/sparql'):
     sparql = SPARQLWrapper(endpoint)
     sparql.setReturnFormat(JSON)
 
