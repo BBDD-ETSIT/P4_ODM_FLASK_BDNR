@@ -91,18 +91,17 @@ Indicamos a Flask el fichero con el que arrancar el servidor:
 
 Debemos tener arrancado MongoDB. Dependiendo de cómo lo hayamos instalado arrancará solo al iniciar la máquina o tendremos que ir a ejecutar el programa "mongod" a la carpeta bin donde hayamos realizado la instalación.
 
-Podemos arrancar el servidor con el siguiente comando. Hasta que no realize el primer ejercicio sobre la configuración de la URI, el servidor no arrancara.
+Podemos arrancar el servidor con el siguiente comando. Hasta que no realize el primer ejercicio sobre la configuración de la URI, el servidor no arrancará y se quedará escuchando pero nos dará un error al conectarnos (Internal Server Error).
 
 ```
-$ flask run
+$ flask --debug run
 ```
 
 
 Abra un navegador y vaya a la url "http://127.0.0.1:5000" para ver la aplicación de gestión de pacientes.
 
-**NOTA: Cada vez que se quiera realizar una prueba del código desarrollado, debemos parar y arrancar de nuevo la practica. Para ello, desde el terminal pulse ctrl+c para parar y arranque de nuevo con npm start**
 
-**NOTA2: Si ha modificado alguna tabla de manera indeseada y se quiere volver a restablecer los valores por defecto, borre la base de datos que ha creado y vuelva a arrancar el servidor con flask.**
+**NOT2: Si ha modificado alguna tabla de manera indeseada y se quiere volver a restablecer los valores por defecto, borre la base de datos que ha creado (se puede hacer con mongosh) y vuelva a arrancar el servidor con flask, esto volverá a llenar la base de datos con los datos iniciales.**
 
 ## 5. Tareas a realizar
 
