@@ -268,6 +268,8 @@ En este momento queremos añadir un campo tipo booleano al modelo paciente, el c
 
 - Edite el método `assign_doctor` que se encuentra en el fichero `flaskr/run.py` para que cuando el doctor asignado sea el nuevo que añadimos en el seed ponga el campo premium a true (y por lo tanto al visualizar el paciente saldrá la fila adecuada). 
 
+- Edite el fichero 'templates/assign_doctor.html' y debajo de la línea 69 añade una nueva linea como la 69 pero con tu nombre y tu id para que el doctor pueda ser asignado.
+
 En este punto hay que realizar una captura de pantalla (CAPTURA2) donde se muestre que en primer lugar ha añadido un paciente nuevo inventado por usted, con datos inventados, le asigna el doctor que añadió al seeder y muestra el paciente.
 
 
